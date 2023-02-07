@@ -18,6 +18,7 @@ export default function Skill({
         <span className="indicator_value dim">{"|".repeat(pieces.second)}</span>
         <span className="indicator_value">{" ".repeat(pieces.third)}</span>
         ]
+        ({average}/{limit})
       </span>  
     </div>
   );
