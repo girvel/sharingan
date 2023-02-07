@@ -12,11 +12,11 @@ export default function Skill({
   return (
     <div>
       {name}: lvl. {level} 
-      <span class="indicator">
+      <span className="indicator">
         [
-        <span class="indicator_value bright">{"|".repeat(pieces.first)}</span>
-        <span class="indicator_value dim">{"|".repeat(pieces.second)}</span>
-        <span class="indicator_value">{" ".repeat(pieces.third)}</span>
+        <span className="indicator_value bright">{"|".repeat(pieces.first)}</span>
+        <span className="indicator_value dim">{"|".repeat(pieces.second)}</span>
+        <span className="indicator_value">{" ".repeat(pieces.third)}</span>
         ]
       </span>  
     </div>
