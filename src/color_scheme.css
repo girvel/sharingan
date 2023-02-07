@@ -7,4 +7,22 @@
   --magenta: #b294bb;
   --cyan:    #8abeb7;
   --white:   #c5c8c6;
+
+  --dim-black:   #131415;
+  --dim-red:     #864343;
+  --dim-green:   #777c44;
+  --dim-yellow:  #9e824c;
+  --dim-blue:    #556a7d;
+  --dim-magenta: #75617b;
+  --dim-cyan:    #5b7d78;
+  --dim-white:   #828482;
+
+  --bright-black:   #666666;
+  --bright-red:     #d54e53;
+  --bright-green:   #b9ca4a;
+  --bright-yellow:  #e7c547;
+  --bright-blue:    #7aa6da;
+  --bright-magenta: #c397d8;
+  --bright-cyan:    #70c0b1;
+  --bright-white:   #eaeaea;
 }
