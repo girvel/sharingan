@@ -1,0 +1,16 @@
+@import url("color_scheme.css");
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: 11pt;
+  line-height: calc(11pt + 3px);
+  font-family: "Classic Console Neue", Consolas, "Courier New";
+  width: 120ch;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+}
