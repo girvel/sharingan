@@ -3,11 +3,10 @@ import './App.css'
 function App() {
   return (
     <>
-      <h2>Header</h2>
-      <p>Hello world!</p>
-      <p>How's it going?</p>
-      <div>a</div>
-      <div>a</div>
+      <h1>Sharingan</h1>
+      <div>
+        Push-ups: lvl. 1 [||||||||||                    ]
+      </div>
     </>
   );
 }
