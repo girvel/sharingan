@@ -1,11 +1,13 @@
 import './Skill.css'
 
 export default function Skill({ 
-  name, level, average, maximum, limit
+  name, level, normal, maximum, limit
 }) {
+  console.log(name, level, normal, maximum, limit);
+
   const pieces = {
-    first: average,
-    second: maximum - average,
+    first: normal,
+    second: maximum - normal,
     third: limit - maximum
   };
 
@@ -18,7 +20,7 @@ export default function Skill({
         <span className="indicator_value dim">{"|".repeat(pieces.second)}</span>
         <span className="indicator_value">{" ".repeat(pieces.third)}</span>
         ]
-        ({average}/{limit})
+        ({normal}/{limit})
       </span>  
     </div>
   );
