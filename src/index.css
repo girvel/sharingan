@@ -11,7 +11,6 @@ body {
   width: 120ch;
   padding: 15px;
   margin: 0 auto;
-  white-space: pre;
 }
 
 p {
@@ -51,3 +50,10 @@ h2::before {
   color: var(--dim-white);
 }
 
+.dim {
+  color: var(--dim-white);
+}
+
+.bright {
+  color: var(--bright-white);
+}
