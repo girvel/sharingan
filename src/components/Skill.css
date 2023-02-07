@@ -1,8 +1,11 @@
-.indicator::before {
-  content: "  ";
-  white-space: pre;
-}
-
 .selected {
   color: var(--yellow) !important;
+}
+
+.maximum_piece {
+  color: var(--dim-white);
+}
+
+.normal_piece {
+  color: var(--bright-white);
 }

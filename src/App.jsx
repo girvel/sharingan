@@ -7,14 +7,14 @@ function fetchDataFromDb() {
     {exercise: "Push-ups", amount: 10},
     {exercise: "Push-ups", amount: 10},
     {exercise: "Push-ups", amount: 12},
-    {exercise: "Knee raises", amount: 20},
-    {exercise: "Knee raises", amount: 20},
-    {exercise: "Knee raises", amount: 28},
+    {exercise: "Leg raises", amount: 20},
+    {exercise: "Leg raises", amount: 20},
+    {exercise: "Leg raises", amount: 28},
   ];
 
   const levels = [
-    {exercise: "Push-ups", level: 1, limit: 30},
-    {exercise: "Knee raises", level: 1, limit: 30}
+    {exercise: "Push-ups", level: "1, Normal", limit: 30},
+    {exercise: "Leg raises", level: "1, Knee raises", limit: 30}
   ];
 
   return {exercises: exercises, levels: levels};
@@ -64,7 +64,7 @@ function App() {
     <>
       <h1>Sharingan</h1>
       <div>
-        <table onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+        <table className="hidden_table" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
           <tbody>
             {skills}
           </tbody>

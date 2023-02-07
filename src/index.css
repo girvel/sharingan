@@ -61,3 +61,7 @@ h2::before {
 .tui {
   white-space: pre;
 }
+
+.hidden_table td {
+  padding: 0 0 0 2ch;
+}

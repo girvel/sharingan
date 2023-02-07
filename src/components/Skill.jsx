@@ -12,13 +12,16 @@ export default function Skill({
   return (
     <tr>
       <td>
-        {name}: lvl. {level}
+        {name}:
+      </td>
+      <td>
+        lvl. {level}
       </td>
       <td className="indicator">
         <span>
           [
-          <span className="tui bright">{"|".repeat(pieces.first)}</span>
-          <span className="tui dim">{"|".repeat(pieces.second)}</span>
+          <span className="tui normal_piece">{"|".repeat(pieces.first)}</span>
+          <span className="tui maximum_piece">{"|".repeat(pieces.second)}</span>
           <span className="tui">{" ".repeat(pieces.third)}</span>
           ]
         </span>
