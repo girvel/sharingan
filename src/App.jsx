@@ -1,23 +1,8 @@
 import './App.css'
 import Skill from "./components/Skill"
+import {group, median} from "./toolkit/statistics.js";
 
-function group(array, selector) {
-  let result = new Map();
-
-  array.forEach(item => {
-    const category = selector(item);
-    if (!result.get(category)) result.set(category, []);
-    result.get(category).push(item);
-  })
-
-  return result;
-}
-
-function median(array) {
-  return array[Math.floor(array.length / 2)];
-}
-
-function App() {
+function fetch_data_from_db() {
   const exercises = [
     {exercise: "Push-ups", amount: 10},
     {exercise: "Push-ups", amount: 10},
@@ -32,20 +17,33 @@ function App() {
     {exercise: "Knee raises", level: 1, limit: 30}
   ];
 
-  // TODO select last exercises for time period / last N
-  let skills = Array.from(group(exercises, ({exercise}) => exercise))
+  return {exercises: exercises, levels: levels};
+}
+
+function calculate_statistics(exercises, levels) {
+  return Array.from(group(exercises, ({exercise}) => exercise))
     .map(([name, data]) => ({
       name: name,
       normal: median(data.map(e => e.amount)),
       maximum: Math.max(...data.map(e => e.amount))
     }))
     .map(obj => {
-      obj.level_object = levels.find(({exercise, limit}) => (exercise === obj.name && obj.normal < limit));
+      const level_object = levels.find(({exercise, limit}) => (exercise === obj.name && obj.normal < limit));
+      obj.level = level_object.level;
+      obj.limit = level_object.limit;
       return obj;
-    })
-    .map(({name, normal, maximum, level_object}, i) => (
+    });
+}
+
+function App() {
+  let {exercises, levels} = fetch_data_from_db();
+
+  // TODO select last exercises for time period / last N
+  let skills = calculate_statistics(exercises, levels)
+    .map(({name, normal, maximum, limit, level}, i) => (
       <Skill key={i} name={name} normal={normal} maximum={maximum}
-             level={level_object.level} limit={level_object.limit} />
+             level={level} limit={limit}
+      />
     ));
 
   return (
