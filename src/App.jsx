@@ -52,7 +52,9 @@ function App() {
     <>
       <h1>Sharingan</h1>
       <div>
-        {skills}
+        <table><tbody>
+          {skills}
+        </tbody></table>
       </div>
     </>
   );

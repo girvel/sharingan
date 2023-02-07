@@ -57,3 +57,7 @@ h2::before {
 .bright {
   color: var(--bright-white);
 }
+
+.tui {
+  white-space: pre;
+}

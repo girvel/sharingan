@@ -10,16 +10,20 @@ export default function Skill({
   };
 
   return (
-    <div>
-      {name}: lvl. {level} 
-      <span className="indicator">
-        [
-        <span className="indicator_value bright">{"|".repeat(pieces.first)}</span>
-        <span className="indicator_value dim">{"|".repeat(pieces.second)}</span>
-        <span className="indicator_value">{" ".repeat(pieces.third)}</span>
-        ]
-        ({normal}/{limit})
-      </span>  
-    </div>
+    <tr>
+      <td>
+        {name}: lvl. {level}
+      </td>
+      <td>
+        <span className="indicator">
+          [
+          <span className="tui bright">{"|".repeat(pieces.first)}</span>
+          <span className="tui dim">{"|".repeat(pieces.second)}</span>
+          <span className="tui">{" ".repeat(pieces.third)}</span>
+          ]
+          ({normal}/{limit})
+        </span>
+      </td>
+    </tr>
   );
 }
