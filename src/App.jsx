@@ -48,8 +48,6 @@ function App() {
              level={level_object.level} limit={level_object.limit} />
     ));
 
-  console.log(skills);
-
   return (
     <>
       <h1>Sharingan</h1>

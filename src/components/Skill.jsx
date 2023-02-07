@@ -3,8 +3,6 @@ import './Skill.css'
 export default function Skill({ 
   name, level, normal, maximum, limit
 }) {
-  console.log(name, level, normal, maximum, limit);
-
   const pieces = {
     first: normal,
     second: maximum - normal,
