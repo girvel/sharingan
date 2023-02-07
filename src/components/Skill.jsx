@@ -14,15 +14,17 @@ export default function Skill({
       <td>
         {name}: lvl. {level}
       </td>
-      <td>
-        <span className="indicator">
+      <td className="indicator">
+        <span>
           [
           <span className="tui bright">{"|".repeat(pieces.first)}</span>
           <span className="tui dim">{"|".repeat(pieces.second)}</span>
           <span className="tui">{" ".repeat(pieces.third)}</span>
           ]
-          ({normal}/{limit})
         </span>
+      </td>
+      <td>
+        ({normal}/{limit})
       </td>
     </tr>
   );

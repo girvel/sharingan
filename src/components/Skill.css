@@ -2,3 +2,7 @@
   content: "  ";
   white-space: pre;
 }
+
+.selected {
+  color: var(--yellow) !important;
+}

@@ -21,6 +21,7 @@ function fetch_data_from_db() {
 }
 
 function calculate_statistics(exercises, levels) {
+  // TODO select last exercises for time period / last N
   return Array.from(group(exercises, ({exercise}) => exercise))
     .map(([name, data]) => ({
       name: name,
@@ -36,9 +37,22 @@ function calculate_statistics(exercises, levels) {
 }
 
 function App() {
+  function onMouseOver(event) {
+    const tr = event.target.closest("tr");
+    if (!tr) return;
+
+    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.add("selected"));
+  }
+
+  function onMouseOut(event) {
+    const tr = event.target.closest("tr");
+    if (!tr) return;
+
+    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("selected"));
+  }
+
   let {exercises, levels} = fetch_data_from_db();
 
-  // TODO select last exercises for time period / last N
   let skills = calculate_statistics(exercises, levels)
     .map(({name, normal, maximum, limit, level}, i) => (
       <Skill key={i} name={name} normal={normal} maximum={maximum}
@@ -50,9 +64,11 @@ function App() {
     <>
       <h1>Sharingan</h1>
       <div>
-        <table><tbody>
-          {skills}
-        </tbody></table>
+        <table onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+          <tbody>
+            {skills}
+          </tbody>
+        </table>
       </div>
     </>
   );
