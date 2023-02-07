@@ -37,6 +37,7 @@ h1 {
   text-align: center;
   margin-bottom: 70pt;
   margin-top: 0;
+  text-shadow: 2px 2px 5px var(--dim-black);
 }
 
 h2 {
