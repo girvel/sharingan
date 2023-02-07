@@ -2,7 +2,7 @@ import './App.css'
 import Skill from "./components/Skill"
 import {group, median} from "./toolkit/statistics.js";
 
-function fetch_data_from_db() {
+function fetchDataFromDb() {
   const exercises = [
     {exercise: "Push-ups", amount: 10},
     {exercise: "Push-ups", amount: 10},
@@ -20,7 +20,7 @@ function fetch_data_from_db() {
   return {exercises: exercises, levels: levels};
 }
 
-function calculate_statistics(exercises, levels) {
+function calculateStatistics(exercises, levels) {
   // TODO select last exercises for time period / last N
   return Array.from(group(exercises, ({exercise}) => exercise))
     .map(([name, data]) => ({
@@ -51,9 +51,9 @@ function App() {
     tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("selected"));
   }
 
-  let {exercises, levels} = fetch_data_from_db();
+  let {exercises, levels} = fetchDataFromDb();
 
-  let skills = calculate_statistics(exercises, levels)
+  let skills = calculateStatistics(exercises, levels)
     .map(({name, normal, maximum, limit, level}, i) => (
       <Skill key={i} name={name} normal={normal} maximum={maximum}
              level={level} limit={limit}
