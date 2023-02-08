@@ -9,3 +9,7 @@
 .normal_piece {
   color: var(--bright-white);
 }
+
+.skill:hover {
+  cursor: pointer;
+}

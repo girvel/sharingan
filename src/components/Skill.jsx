@@ -16,7 +16,7 @@ export default function Skill({
   ];
 
   return (
-    <tr>
+    <tr className="skill">
       <td>
         {name}:
       </td>

@@ -50,14 +50,14 @@ function calculateStatistics(sets, all_levels, user_levels) {
 
 function App() {
   function onMouseOver(event) {
-    const tr = event.target.closest("tr");
+    const tr = event.target.closest("tr.skill");
     if (!tr) return;
 
     tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.add("selected"));
   }
 
   function onMouseOut(event) {
-    const tr = event.target.closest("tr");
+    const tr = event.target.closest("tr.skill");
     if (!tr) return;
 
     tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("selected"));
