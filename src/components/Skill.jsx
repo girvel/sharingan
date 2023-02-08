@@ -3,11 +3,17 @@ import './Skill.css'
 export default function Skill({ 
   name, level, normal, maximum, limit
 }) {
-  const pieces = {
-    first: normal,
-    second: maximum - normal,
-    third: limit - maximum
-  };
+  const indicator_value = [
+    ...Array(normal).fill(0).map((_, i) =>
+      <span id={i} data-amount={i + 1} className="tui normal_piece indicator_value">|</span>
+    ),
+    ...Array(maximum - normal).fill(0).map((_, i) =>
+      <span id={normal + i} data-amount={normal + i + 1} className="tui maximum_piece indicator_value">|</span>
+    ),
+    ...Array(limit - maximum).fill(0).map((_, i) =>
+      <span id={maximum + i} data-amount={maximum + i + 1} className="tui indicator_value"> </span>
+    ),
+  ];
 
   return (
     <tr>
@@ -20,9 +26,7 @@ export default function Skill({
       <td className="indicator">
         <span>
           [
-          <span className="tui normal_piece">{"|".repeat(pieces.first)}</span>
-          <span className="tui maximum_piece">{"|".repeat(pieces.second)}</span>
-          <span className="tui">{" ".repeat(pieces.third)}</span>
+          {indicator_value}
           ]
         </span>
       </td>
