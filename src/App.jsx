@@ -20,8 +20,6 @@ function groupDataBySkills(data) {
 
 let grouped_skill_data = groupDataBySkills(fetchDataFromDb());
 
-let skills = grouped_skill_data.map((data, i) => <Skill key={i} data={data} />);
-
 
 function App() {
   const [selected, setSelected] = useState(null);
@@ -37,20 +35,6 @@ function App() {
     skill.querySelector("td.indicator").classList.add("selected");
   }
 
-  function onMouseOver(event) {
-    const tr = event.target.closest("tr.skill");
-    if (!tr) return;
-
-    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.add("highlighted"));
-  }
-
-  function onMouseOut(event) {
-    const tr = event.target.closest("tr.skill");
-    if (!tr) return;
-
-    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("highlighted"));
-  }
-
   function onClick(event) {
     const tr = event.target.closest("tr.skill");
     if (!tr) return;
@@ -59,18 +43,19 @@ function App() {
   }
 
   document.onclick = (event) => {
-    console.log(1);
     const tr = event.target.closest("tr.skill");
     if (tr) return;
 
     selectSkill(null);
   }
 
+  let skills = grouped_skill_data.map((data, i) => <Skill key={i} data={data} />);
+
   return (
     <>
       <h1>Sharingan</h1>
       <div>
-        <table className="hidden_table" onMouseOver={onMouseOver} onMouseOut={onMouseOut} onClick={onClick}>
+        <table className="hidden_table" onClick={onClick}>
           <tbody>
             {skills}
           </tbody>

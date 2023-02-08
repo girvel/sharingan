@@ -1,4 +1,4 @@
-.highlighted {
+tr.skill:hover td:not(.indicator) {
   color: var(--yellow);
 }
 
