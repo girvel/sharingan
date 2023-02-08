@@ -3,36 +3,48 @@ import Skill from "./components/Skill"
 import {group, median} from "./toolkit/statistics.js";
 
 function fetchDataFromDb() {
-  const exercises = [
-    {exercise: "Push-ups", amount: 10},
-    {exercise: "Push-ups", amount: 10},
-    {exercise: "Push-ups", amount: 12},
-    {exercise: "Leg raises", amount: 20},
-    {exercise: "Leg raises", amount: 20},
-    {exercise: "Leg raises", amount: 28},
+  const sets = [
+    {exercise: "Push-ups", amount: 10, level: 1},
   ];
 
-  const levels = [
-    {exercise: "Push-ups", level: "1, Normal", limit: 30},
-    {exercise: "Leg raises", level: "1, Knee raises", limit: 30}
+  const all_levels = [
+    {exercise: "Push-ups", level: 1, level_name: "Normal", limit: 30},
+    {exercise: "Leg raises", level: 1, level_name: "Knee raises", limit: 30}
   ];
 
-  return {exercises: exercises, levels: levels};
+  const user_levels = [
+    {exercise: "Push-ups", level: 1},
+  ]
+
+  return {sets: sets, all_levels: all_levels, user_levels: user_levels};
 }
 
-function calculateStatistics(exercises, levels) {
+function calculateStatistics(sets, all_levels, user_levels) {
   // TODO select last exercises for time period / last N
-  return Array.from(group(exercises, ({exercise}) => exercise))
-    .map(([name, data]) => ({
-      name: name,
+  const exercises_statistics = Array.from(group(sets, s => s.exercise))
+    .map(([exercise, data]) => ({
+      exercise: exercise,
       normal: median(data.map(e => e.amount)),
-      maximum: Math.max(...data.map(e => e.amount))
-    }))
-    .map(obj => {
-      const level_object = levels.find(({exercise, limit}) => (exercise === obj.name && obj.normal < limit));
-      obj.level = level_object.level;
-      obj.limit = level_object.limit;
-      return obj;
+      maximum: Math.max(...data.map(e => e.amount)),
+      max_level: Math.max(...data.map(e => e.level)),
+    }));
+
+  return Array.from(group(all_levels, l => l.exercise))
+    .map(([exercise, levels]) => {
+      const statistics = exercises_statistics.find(s => s.exercise === exercise) ?? {
+        exercise: exercise,
+        normal: 0,
+        maximum: 0,
+      };
+
+      const user_level = user_levels.find(ul => ul.exercise === exercise)?.level ?? 1;
+      const limit = levels.find(l => l.level === user_level).limit;
+
+      return {
+        ...statistics,
+        level: user_level,
+        limit: limit,
+      };
     });
 }
 
@@ -51,14 +63,16 @@ function App() {
     tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("selected"));
   }
 
-  let {exercises, levels} = fetchDataFromDb();
+  let {sets, all_levels, user_levels} = fetchDataFromDb();
 
-  let skills = calculateStatistics(exercises, levels)
-    .map(({name, normal, maximum, limit, level}, i) => (
-      <Skill key={i} name={name} normal={normal} maximum={maximum}
-             level={level} limit={limit}
+  let skills = calculateStatistics(sets, all_levels, user_levels)
+    .map((s, i) => (
+      <Skill key={i} name={s.exercise} normal={s.normal} maximum={s.maximum}
+             level={s.level} limit={s.limit}
       />
     ));
+
+  console.log(new Date().toISOString());
 
   return (
     <>
