@@ -1,65 +1,26 @@
 import './App.css'
 import Skill from "./components/Skill"
-import {group, median} from "./toolkit/statistics.js";
+import {group} from "./toolkit/statistics.js";
 import {useState} from "react";
+import {fetchDataFromDb} from "./toolkit/db.js";
 
-function fetchDataFromDb() {
-  const sets = [
-    {exercise: "Push-ups", amount: 10, level: 1},
-  ];
 
-  const all_levels = [
-    {exercise: "Push-ups", level: 1, level_name: "Normal", limit: 30},
-    {exercise: "Leg raises", level: 1, level_name: "Knee raises", limit: 30}
-  ];
-
-  const user_levels = [
-    {exercise: "Push-ups", level: 1},
-  ]
-
-  return {sets: sets, all_levels: all_levels, user_levels: user_levels};
-}
-
-function calculateStatistics(sets, all_levels, user_levels) {
-  // TODO select last exercises for time period / last N
-  const exercises_statistics = Array.from(group(sets, s => s.exercise))
-    .map(([exercise, data]) => ({
+// should return [{exercise, levels, user_level, sets}]
+function groupDataBySkills(data) {
+  const sets_grouped = group(data.sets, s => s.exercise);
+  return Array.from(group(data.all_levels, l => l.exercise)).map(([exercise, levels]) => {
+    return {
       exercise: exercise,
-      normal: median(data.map(e => e.amount)),
-      maximum: Math.max(...data.map(e => e.amount)),
-      max_level: Math.max(...data.map(e => e.level)),
-    }));
-
-  return Array.from(group(all_levels, l => l.exercise))
-    .map(([exercise, levels]) => {
-      const statistics = exercises_statistics.find(s => s.exercise === exercise) ?? {
-        exercise: exercise,
-        normal: 0,
-        maximum: 0,
-      };
-
-      const user_level = user_levels.find(ul => ul.exercise === exercise)?.level ?? 1;
-      const limit = levels.find(l => l.level === user_level).limit;
-
-      return {
-        ...statistics,
-        level: user_level,
-        limit: limit,
-      };
-    });
+      levels: levels,
+      user_level: data.user_levels.find(ul => ul.exercise === exercise)?.level ?? 1,
+      sets: sets_grouped.get(exercise) ?? [],
+    };
+  });
 }
 
+let grouped_skill_data = groupDataBySkills(fetchDataFromDb());
 
-let {sets, all_levels, user_levels} = fetchDataFromDb();
-
-let skills = calculateStatistics(sets, all_levels, user_levels)
-  .map((s, i) => (
-    <Skill key={i} name={s.exercise} normal={s.normal} maximum={s.maximum}
-           level={s.level} limit={s.limit}
-    />
-  ));
-
-console.log(new Date().toISOString());
+let skills = grouped_skill_data.map((data, i) => <Skill key={i} data={data} />);
 
 
 function App() {

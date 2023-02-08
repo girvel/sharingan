@@ -1,8 +1,14 @@
 import './Skill.css'
+import {median} from "../toolkit/statistics.js";
 
-export default function Skill({ 
-  name, level, normal, maximum, limit
-}) {
+export default function Skill({data}) {
+  let {level_name, limit} = data.levels.find(l => l.level === data.user_level);
+
+  let [normal, maximum] = data.sets.length === 0 ? [0, 0] : [
+    median(data.sets.map(s => s.amount)),
+    Math.max(...data.sets.map(s => s.amount)),
+  ]
+
   const indicator_value = [
     ...Array(normal).fill(0).map((_, i) =>
       <span key={i} data-amount={i + 1} className="tui normal_piece indicator_value">|</span>
@@ -18,10 +24,10 @@ export default function Skill({
   return (
     <tr className="skill">
       <td>
-        {name}:
+        {data.exercise}:
       </td>
       <td>
-        lvl. {level}
+        lvl. {data.user_level}, {level_name}
       </td>
       <td className="indicator">
         <span>
