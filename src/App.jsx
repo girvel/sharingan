@@ -1,6 +1,7 @@
 import './App.css'
 import Skill from "./components/Skill"
 import {group, median} from "./toolkit/statistics.js";
+import {useState} from "react";
 
 function fetchDataFromDb() {
   const sets = [
@@ -48,37 +49,67 @@ function calculateStatistics(sets, all_levels, user_levels) {
     });
 }
 
+
+let {sets, all_levels, user_levels} = fetchDataFromDb();
+
+let skills = calculateStatistics(sets, all_levels, user_levels)
+  .map((s, i) => (
+    <Skill key={i} name={s.exercise} normal={s.normal} maximum={s.maximum}
+           level={s.level} limit={s.limit}
+    />
+  ));
+
+console.log(new Date().toISOString());
+
+
 function App() {
+  const [selected, setSelected] = useState(null);
+
+  function selectSkill(skill) {
+    if (selected) {
+      selected.querySelector("td.indicator").classList.remove("selected");
+    }
+
+    setSelected(skill);
+    if (!skill) return;
+
+    skill.querySelector("td.indicator").classList.add("selected");
+  }
+
   function onMouseOver(event) {
     const tr = event.target.closest("tr.skill");
     if (!tr) return;
 
-    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.add("selected"));
+    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.add("highlighted"));
   }
 
   function onMouseOut(event) {
     const tr = event.target.closest("tr.skill");
     if (!tr) return;
 
-    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("selected"));
+    tr.querySelectorAll("td:not(.indicator)").forEach(e => e.classList.remove("highlighted"));
   }
 
-  let {sets, all_levels, user_levels} = fetchDataFromDb();
+  function onClick(event) {
+    const tr = event.target.closest("tr.skill");
+    if (!tr) return;
 
-  let skills = calculateStatistics(sets, all_levels, user_levels)
-    .map((s, i) => (
-      <Skill key={i} name={s.exercise} normal={s.normal} maximum={s.maximum}
-             level={s.level} limit={s.limit}
-      />
-    ));
+    selectSkill(tr);
+  }
 
-  console.log(new Date().toISOString());
+  document.onclick = (event) => {
+    console.log(1);
+    const tr = event.target.closest("tr.skill");
+    if (tr) return;
+
+    selectSkill(null);
+  }
 
   return (
     <>
       <h1>Sharingan</h1>
       <div>
-        <table className="hidden_table" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+        <table className="hidden_table" onMouseOver={onMouseOver} onMouseOut={onMouseOut} onClick={onClick}>
           <tbody>
             {skills}
           </tbody>

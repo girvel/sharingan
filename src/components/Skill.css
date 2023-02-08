@@ -1,5 +1,9 @@
+.highlighted {
+  color: var(--yellow);
+}
+
 .selected {
-  color: var(--yellow) !important;
+  color: var(--bright-yellow);
 }
 
 .maximum_piece {

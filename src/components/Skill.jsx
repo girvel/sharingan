@@ -5,13 +5,13 @@ export default function Skill({
 }) {
   const indicator_value = [
     ...Array(normal).fill(0).map((_, i) =>
-      <span id={i} data-amount={i + 1} className="tui normal_piece indicator_value">|</span>
+      <span key={i} data-amount={i + 1} className="tui normal_piece indicator_value">|</span>
     ),
     ...Array(maximum - normal).fill(0).map((_, i) =>
-      <span id={normal + i} data-amount={normal + i + 1} className="tui maximum_piece indicator_value">|</span>
+      <span key={normal + i} data-amount={normal + i + 1} className="tui maximum_piece indicator_value">|</span>
     ),
     ...Array(limit - maximum).fill(0).map((_, i) =>
-      <span id={maximum + i} data-amount={maximum + i + 1} className="tui indicator_value"> </span>
+      <span key={maximum + i} data-amount={maximum + i + 1} className="tui indicator_value"> </span>
     ),
   ];
 
