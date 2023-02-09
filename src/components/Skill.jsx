@@ -2,7 +2,7 @@ import './Skill.css'
 import {median} from "../toolkit/statistics.js";
 import {useState} from "react";
 
-export default function Skill({data, data_index, selected}) {
+export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
 
   let {level_name, limit} = _data.levels.find(l => l.level === _data.user_level);
@@ -13,7 +13,7 @@ export default function Skill({data, data_index, selected}) {
   ]
 
   function onClick(event) {
-    const value = event.target.closest("span.indicator_value");
+    const value = event.target.closest(".indicator_value");
     if (!value) return;
 
     setData({
@@ -48,8 +48,8 @@ export default function Skill({data, data_index, selected}) {
       <td>
         lvl. {_data.user_level}, {level_name}
       </td>
-      <td className={"indicator" + (selected ? " selected" : "")}>
-        <span onClick={selected ? onClick : () => {}}>
+      <td>
+        <span onClick={onClick}>
           [
           {indicator_value}
           ]

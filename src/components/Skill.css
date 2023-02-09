@@ -1,4 +1,4 @@
-tr.skill:hover td:not(.indicator) {
+tr.skill:hover :not(.indicator_value) {
   color: var(--yellow);
 }
 
