@@ -1,7 +1,7 @@
-import './Skill.css'
+import './Skill.css';
 import {max, median} from "../toolkit/statistics.js";
 import {useState} from "react";
-import {log} from "../toolkit/stuff.js";
+import IndicatorValue from "./IndicatorValue.jsx";
 
 export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
@@ -10,7 +10,7 @@ export default function Skill({data, data_index}) {
 
   let sets_amounts = _data.sets.filter(s => s.level == _data.user_level).map(s => s.amount)
 
-  let normal = median(sets_amounts, 0);
+  let norm = median(sets_amounts, 0);
   let maximum = max(sets_amounts, 0);
   let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);
 
@@ -29,14 +29,14 @@ export default function Skill({data, data_index}) {
   }
 
   const indicator_value = [
-    ...Array.from({length: normal}, (_, i) =>
-      <span key={i} data-amount={log(i + 1)} className="tui normal_piece indicator_value">|</span>
+    ...Array.from({length: norm}, (_, i) =>
+      <IndicatorValue key={i} amount={i + 1} kind="norm" />
     ),
-    ...Array.from({length: maximum - normal}, (_, i) =>
-      <span key={normal + i} data-amount={log(normal + i + 1)} className="tui maximum_piece indicator_value">|</span>
+    ...Array.from({length: maximum - norm}, (_, i) =>
+      <IndicatorValue key={norm + i} amount={norm + i + 1} kind="maximum" />
     ),
     ...Array.from({length: limit - maximum}, (_, i) =>
-      <span key={maximum + i} data-amount={log(maximum + i + 1)} className="tui indicator_value"> </span>
+      <IndicatorValue key={maximum + i} amount={maximum + i + 1} kind="empty" />
     ),
   ];
 
@@ -56,7 +56,7 @@ export default function Skill({data, data_index}) {
         </span>
       </td>
       <td>
-        ({normal}/{limit})
+        ({norm}/{limit})
       </td>
       <td>
         <span className="dim">{total_amount}</span>

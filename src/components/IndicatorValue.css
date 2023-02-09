@@ -1,0 +1,7 @@
+.maximum_piece {
+    color: var(--dim-white);
+}
+
+.norm_piece {
+    color: var(--bright-white);
+}

@@ -2,18 +2,6 @@ tr.skill:hover :not(.indicator_value) {
   color: var(--yellow);
 }
 
-.selected {
-  color: var(--bright-yellow);
-}
-
-.maximum_piece {
-  color: var(--dim-white);
-}
-
-.normal_piece {
-  color: var(--bright-white);
-}
-
 .skill:hover {
   cursor: pointer;
 }
