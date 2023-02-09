@@ -1,5 +1,9 @@
-tr.skill:hover :not(.indicator_value) {
+tr.skill:hover {
   color: var(--yellow);
+}
+
+tr.skill:hover .indicator_inside {
+  color: inherit;
 }
 
 .skill:hover {
