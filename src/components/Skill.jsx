@@ -1,6 +1,7 @@
 import './Skill.css'
 import {max, median} from "../toolkit/statistics.js";
 import {useState} from "react";
+import {log} from "../toolkit/stuff.js";
 
 export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
@@ -21,7 +22,7 @@ export default function Skill({data, data_index}) {
       ..._data,
       sets: [..._data.sets, {
         exercise: _data.exercise,
-        amount: value.getAttribute("data-amount"),
+        amount: Number(value.getAttribute("data-amount")),
         level: _data.user_level,
       }]
     });
@@ -29,13 +30,13 @@ export default function Skill({data, data_index}) {
 
   const indicator_value = [
     ...Array.from({length: normal}, (_, i) =>
-      <span key={i} data-amount={i + 1} className="tui normal_piece indicator_value">|</span>
+      <span key={i} data-amount={log(i + 1)} className="tui normal_piece indicator_value">|</span>
     ),
     ...Array.from({length: maximum - normal}, (_, i) =>
-      <span key={normal + i} data-amount={normal + i + 1} className="tui maximum_piece indicator_value">|</span>
+      <span key={normal + i} data-amount={log(normal + i + 1)} className="tui maximum_piece indicator_value">|</span>
     ),
     ...Array.from({length: limit - maximum}, (_, i) =>
-      <span key={maximum + i} data-amount={maximum + i + 1} className="tui indicator_value"> </span>
+      <span key={maximum + i} data-amount={log(maximum + i + 1)} className="tui indicator_value"> </span>
     ),
   ];
 
