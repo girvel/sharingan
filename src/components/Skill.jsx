@@ -6,10 +6,12 @@ export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
 
   let {level_name, limit} = _data.levels.find(l => l.level === _data.user_level);
-  // TODO use only sets with current level
-  let normal = median(_data.sets.map(s => s.amount), 0);
-  let maximum = max(_data.sets.map(s => s.amount), 0);
-  let total_amount = _data.sets.map(s => s.amount).reduce((sum, a) => sum + Number(a), 0);
+
+  let sets_amounts = _data.sets.filter(s => s.level == _data.user_level).map(s => s.amount)
+
+  let normal = median(sets_amounts, 0);
+  let maximum = max(sets_amounts, 0);
+  let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);
 
   function onClick(event) {
     const value = event.target.closest(".indicator_value");
