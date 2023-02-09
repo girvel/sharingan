@@ -16,8 +16,14 @@ export default function Skill({data, data_index, selected}) {
     const value = event.target.closest("span.indicator_value");
     if (!value) return;
 
-    _data.sets.push({exercise: _data.exercise, amount: value.getAttribute("data-amount"), level: _data.user_level});
-    setData(_data);
+    setData({
+      ..._data,
+      sets: [..._data.sets, {
+        exercise: _data.exercise,
+        amount: value.getAttribute("data-amount"),
+        level: _data.user_level,
+      }]
+    });
   }
 
   const indicator_value = [
@@ -32,6 +38,8 @@ export default function Skill({data, data_index, selected}) {
     ),
   ];
 
+  console.log("Skill.update");
+
   return (
     <tr className="skill" data-index={data_index}>
       <td>
@@ -41,7 +49,7 @@ export default function Skill({data, data_index, selected}) {
         lvl. {_data.user_level}, {level_name}
       </td>
       <td className={"indicator" + (selected ? " selected" : "")}>
-        <span onClick={onClick}>
+        <span onClick={selected ? onClick : () => {}}>
           [
           {indicator_value}
           ]
