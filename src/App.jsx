@@ -10,32 +10,23 @@ let grouped_skill_data = groupDataBySkills(fetchDataFromDb());
 function App() {
   const [selected, setSelected] = useState(null);
 
-  function selectSkill(skill) {
-    if (selected) {
-      selected.querySelector("td.indicator").classList.remove("selected");
-    }
-
-    setSelected(skill);
-    if (!skill) return;
-
-    skill.querySelector("td.indicator").classList.add("selected");
-  }
-
   function onClick(event) {
     const tr = event.target.closest("tr.skill");
     if (!tr) return;
 
-    selectSkill(tr);
+    setSelected(tr.getAttribute("data-index"));
   }
 
   document.onclick = (event) => {
     const tr = event.target.closest("tr.skill");
     if (tr) return;
 
-    selectSkill(null);
+    setSelected(null);
   }
 
-  let skills = grouped_skill_data.map((data, i) => <Skill key={i} data={data} />);
+  let skills = grouped_skill_data.map((data, i) =>
+    <Skill key={i} data={data} data_index={i} selected={selected == i} />
+  );
 
   return (
     <>

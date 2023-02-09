@@ -1,7 +1,7 @@
 import './Skill.css'
 import {median} from "../toolkit/statistics.js";
 
-export default function Skill({data}) {
+export default function Skill({data, data_index, selected}) {
   let {level_name, limit} = data.levels.find(l => l.level === data.user_level);
 
   let [normal, maximum] = data.sets.length === 0 ? [0, 0] : [
@@ -22,14 +22,14 @@ export default function Skill({data}) {
   ];
 
   return (
-    <tr className="skill">
+    <tr className="skill" data-index={data_index}>
       <td>
         {data.exercise}:
       </td>
       <td>
         lvl. {data.user_level}, {level_name}
       </td>
-      <td className="indicator">
+      <td className={"indicator" + (selected ? " selected" : "")}>
         <span>
           [
           {indicator_value}
