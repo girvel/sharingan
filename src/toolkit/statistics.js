@@ -11,7 +11,7 @@ export function group(array, selector) {
 }
 
 export function median(array, default_) {
-  return array.length == 0 ? default_ : array[Math.floor((array.length - 1) / 2)];
+  return array.length == 0 ? default_ : array.sort((a, b) => a - b)[Math.floor((array.length - 1) / 2)];
 }
 
 export function max(array, default_) {
