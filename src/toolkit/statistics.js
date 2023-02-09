@@ -11,5 +11,5 @@ export function group(array, selector) {
 }
 
 export function median(array) {
-  return array[Math.floor(array.length / 2)];
+  return array[Math.floor((array.length - 1) / 2)];
 }

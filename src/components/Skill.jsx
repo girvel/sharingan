@@ -38,8 +38,6 @@ export default function Skill({data, data_index}) {
     ),
   ];
 
-  console.log("Skill.update");
-
   return (
     <tr className="skill" data-index={data_index}>
       <td>
