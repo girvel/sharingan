@@ -1,16 +1,15 @@
 import './Skill.css'
-import {median} from "../toolkit/statistics.js";
+import {max, median} from "../toolkit/statistics.js";
 import {useState} from "react";
 
 export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
 
   let {level_name, limit} = _data.levels.find(l => l.level === _data.user_level);
-
-  let [normal, maximum] = _data.sets.length === 0 ? [0, 0] : [
-    median(_data.sets.map(s => s.amount)),
-    Math.max(..._data.sets.map(s => s.amount)),
-  ]
+  // TODO use only sets with current level
+  let normal = median(_data.sets.map(s => s.amount), 0);
+  let maximum = max(_data.sets.map(s => s.amount), 0);
+  let total_amount = _data.sets.map(s => s.amount).reduce((sum, a) => sum + Number(a), 0);
 
   function onClick(event) {
     const value = event.target.closest(".indicator_value");
@@ -55,6 +54,9 @@ export default function Skill({data, data_index}) {
       </td>
       <td>
         ({normal}/{limit})
+      </td>
+      <td>
+        <span className="dim">{total_amount}</span>
       </td>
     </tr>
   );

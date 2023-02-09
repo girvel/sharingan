@@ -10,6 +10,10 @@ export function group(array, selector) {
   return result;
 }
 
-export function median(array) {
-  return array[Math.floor((array.length - 1) / 2)];
+export function median(array, default_) {
+  return array.length == 0 ? default_ : array[Math.floor((array.length - 1) / 2)];
+}
+
+export function max(array, default_) {
+  return array.length == 0 ? default_ : Math.max(...array);
 }
