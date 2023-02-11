@@ -3,7 +3,7 @@ import Skill from "./components/Skill"
 import {fetchDataFromDb, groupDataBySkills} from "./toolkit/db.js";
 
 
-let grouped_skill_data = groupDataBySkills(fetchDataFromDb());
+let grouped_skill_data = groupDataBySkills(await fetchDataFromDb());
 
 
 export default function App() {
