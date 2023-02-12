@@ -36,6 +36,6 @@ export function groupDataBySkills(data) {
   }));
 }
 
-export async function pushSet(set) {
-  return post("set", {user: "girvel", ...set})
+export async function pushExerciseSet(set) {
+  return post("exercise_set", {user: "girvel", ...set})
 }
