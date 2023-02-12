@@ -2,6 +2,7 @@ import './Skill.css';
 import {max, median} from "../toolkit/statistics.js";
 import {useState} from "react";
 import IndicatorValue from "./IndicatorValue.jsx";
+import {pushSet} from "../toolkit/db.js";
 
 export default function Skill({data, data_index}) {
   let [_data, setData] = useState(data);
@@ -18,14 +19,18 @@ export default function Skill({data, data_index}) {
     const value = event.target.closest(".indicator_value");
     if (!value) return;
 
-    setData({
-      ..._data,
-      sets: [..._data.sets, {
-        exercise: _data.exercise,
-        amount: Number(value.getAttribute("data-amount")),
-        level: _data.user_level,
-      }]
-    });
+    const set_to_add = {
+      exercise: _data.exercise,
+      amount: Number(value.getAttribute("data-amount")),
+      level: _data.user_level,
+    };
+
+    pushSet(set_to_add).then(() => {
+      setData({
+        ..._data,
+        sets: [..._data.sets, set_to_add]
+      });
+    })
   }
 
   const indicator_value = [

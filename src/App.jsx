@@ -1,9 +1,9 @@
 import './App.css'
 import Skill from "./components/Skill"
-import {fetchDataFromDb, groupDataBySkills} from "./toolkit/db.js";
+import {fetchUserData, groupDataBySkills} from "./toolkit/db.js";
 
 
-let grouped_skill_data = groupDataBySkills(await fetchDataFromDb());
+let grouped_skill_data = groupDataBySkills(await fetchUserData());
 
 
 export default function App() {

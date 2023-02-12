@@ -1,24 +1,27 @@
 import {group} from "./statistics.js";
 import {Data} from "dataclass";
 
-class DbRawData extends Data { levels; sets; user_levels; }
-
-export async function fetchDataFromDb() {
-  const response = await fetch("http://localhost:8000/user_data/", {
-    method: 'POST',
+async function post(call, args) {
+  const response = await fetch(`http://localhost:8000/${call}/`, {
+    method: 'POST',  // TODO make it GET?
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      user: "girvel",
-    }),
+    body: JSON.stringify(args),
   });
 
   if (response.ok) {
-    return DbRawData.create(await response.json());
+    return await response.json();
   }
 
   console.error(`HTTP error ${response.status}: ${response.statusText}`);
+  return Promise.reject();
+}
+
+class DbRawData extends Data { levels; sets; user_levels; }
+
+export async function fetchUserData() {
+  return DbRawData.create(await post("user_data", {user: "girvel"}))
 }
 
 class SkillData extends Data { exercise; levels; user_level; sets; }
@@ -31,4 +34,8 @@ export function groupDataBySkills(data) {
     user_level: data.user_levels.find(ul => ul.exercise === exercise)?.level ?? 1,
     sets: sets_grouped.get(exercise) ?? [],
   }));
+}
+
+export async function pushSet(set) {
+  return post("set", {user: "girvel", ...set})
 }
