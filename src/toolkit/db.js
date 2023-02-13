@@ -1,8 +1,11 @@
 import {group} from "./statistics.js";
 import {Data} from "dataclass";
+import {inDevelopmentMode} from "./stuff.js";
+
+const server_url = "http://" + (inDevelopmentMode() ? "localhost:8000" : "aws.girvel.xyz");
 
 async function post(call, args) {
-  const response = await fetch(`http://localhost:8000/${call}/`, {
+  const response = await fetch(`${server_url}/${call}/`, {
     method: 'POST',  // TODO make it GET?
     headers: {
       'Content-Type': 'application/json'
