@@ -44,7 +44,7 @@ export default function Skill({data, data_index}) {
 
   let sets_amounts = _data.sets.filter(s => s.level == _data.user_level).map(s => s.amount)
 
-  let norm = median(sets_amounts, 0);
+  let norm = median(sets_amounts.slice(-5), 0);
   let maximum = max(sets_amounts, 0);
   let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);  // TODO remove number?
 
