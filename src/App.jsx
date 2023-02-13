@@ -2,7 +2,6 @@ import './App.css'
 import Skill from "./components/Skill"
 import {fetchUserData, groupDataBySkills} from "./toolkit/db.js";
 import {useState} from "react";
-import {inDevelopmentMode} from "./toolkit/stuff.js";
 
 
 export default function App() {
@@ -15,8 +14,6 @@ export default function App() {
       ));
     });
   }
-
-  console.log(inDevelopmentMode());
 
   return (
     <>

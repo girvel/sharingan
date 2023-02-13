@@ -7,10 +7,5 @@
 }
 
 .indicator_value:hover span {
-    display: none;
-}
-
-.indicator_value:hover:after {
-    color: var(--bright-yellow);
-    content: "#";
+    color: var(--bright-yellow) !important;
 }
