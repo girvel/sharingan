@@ -2,9 +2,9 @@ tr.skill:hover {
   color: var(--yellow);
 }
 
-tr.skill:hover .indicator_inside {
-  color: inherit;
-}
+/*tr.skill:hover .indicator_inside {*/
+/*  color: inherit;*/
+/*}*/
 
 .skill:hover {
   cursor: pointer;

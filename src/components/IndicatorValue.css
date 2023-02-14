@@ -6,6 +6,12 @@
     color: var(--bright-white);
 }
 
-.indicator_value:hover span {
-    color: var(--bright-yellow) !important;
+.indicator_value:hover span span {
+    visibility: hidden;
+    display: none;
+}
+
+.indicator_value:hover span::before {
+    content: "|";
+    color: var(--bright-yellow);
 }
