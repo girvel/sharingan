@@ -9,10 +9,10 @@ export default function Login({onLogin}) {
   return (
     <>
       <h1>Sharingan</h1>
-      <form className="login_form">
+      <form className="login_form" onSubmit={onSubmit}>
         <input id="username_input" maxLength="40" placeholder="Username" className="login_element"></input>
-        <button onClick={onSubmit} className="login_element">Login</button>
+        <button type="submit" className="login_element">Login</button>
       </form>
     </>
-  )
+  );
 }
