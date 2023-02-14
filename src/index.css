@@ -1,5 +1,10 @@
 @import url("color_scheme.css");
 
+@font-face {
+  font-family: "Classic Console Neue";
+  src: url(/clacon2.ttf);
+}
+
 body {
   background-color: var(--black);
   color: var(--white);
