@@ -65,3 +65,46 @@ h2::before {
 .hidden_table td {
   padding: 0 0 0 2ch;
 }
+
+input:not([type]), input[type="text"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  border-bottom: 2px solid var(--dim-white);
+  outline: none;
+  background: transparent;
+}
+
+input:not([type]):focus, input[type="text"]:focus {
+  border-bottom: 2px solid var(--white);
+}
+
+input {
+  color: var(--bright-white);
+  font: inherit;
+}
+
+input::placeholder {
+  color: var(--dim-white);
+  font: inherit;
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  background: transparent;
+
+  border: 1px solid var(--bright-white);
+  font: inherit;
+  color: var(--bright-white);
+}
+
+button:hover {
+  cursor: pointer;
+  border-color: var(--black);
+  color: var(--black);
+  background: var(--bright-white);
+}

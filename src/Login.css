@@ -1,0 +1,13 @@
+h1 {
+    margin-bottom: 500px;
+}
+
+.login_element {
+    margin: 30px auto;
+    display: block;
+}
+
+.login_form {
+    margin: 0 auto;
+    display: block;
+}
