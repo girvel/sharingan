@@ -4,7 +4,9 @@ import {useState} from "react";
 import IndicatorValue from "./IndicatorValue.jsx";
 import {pushExerciseSet} from "../toolkit/db.js";
 
-export default function Skill({data, data_index}) {
+
+// TODO remove data_index
+export default function Skill({data, data_index, username}) {
   let [_data, set_data] = useState(data);
   let [counterOverride, setCounterOverride] = useState(null);
 
@@ -19,7 +21,7 @@ export default function Skill({data, data_index}) {
       level: _data.user_level,
     };
 
-    pushExerciseSet(set_to_add).then(() => {
+    pushExerciseSet(username, set_to_add).then(() => {
       set_data({
         ..._data,
         sets: [..._data.sets, set_to_add]

@@ -23,8 +23,8 @@ async function post(call, args) {
 
 class DbRawData extends Data { levels; sets; user_levels; }
 
-export async function fetchUserData() {
-  return DbRawData.create(await post("user_data", {user: "girvel"}))
+export async function fetchUserData(username) {
+  return DbRawData.create(await post("user_data", {user: username}))
 }
 
 class SkillData extends Data { exercise; levels; user_level; sets; }
@@ -39,6 +39,6 @@ export function groupDataBySkills(data) {
   }));
 }
 
-export async function pushExerciseSet(set) {
-  return post("exercise_set", {user: "girvel", ...set})
+export async function pushExerciseSet(username, set) {
+  return post("exercise_set", {user: username, ...set})
 }

@@ -7,7 +7,7 @@ export default function IndicatorValue({amount, kind}) {
     empty: ["", " "],
   }[kind];
 
-  // Additional inside span needed for highlighting
+  // Additional two spans inside needed for CSS tricks with highlighting
   return (
     <span data-amount={amount} className={"tui indicator_value " + pieceClass}>
       <span><span>{content}</span></span>
