@@ -7,7 +7,7 @@ import {pushExerciseSet} from "../toolkit/db.js";
 
 // TODO remove data_index
 export default function Skill({data, data_index, username}) {
-  let [_data, set_data] = useState(data);
+  let [_data, setData] = useState(data);
   let [counterOverride, setCounterOverride] = useState(null);
 
 
@@ -22,7 +22,7 @@ export default function Skill({data, data_index, username}) {
     };
 
     pushExerciseSet(username, set_to_add).then(() => {
-      set_data({
+      setData({
         ..._data,
         sets: [..._data.sets, set_to_add]
       });
