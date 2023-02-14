@@ -33,9 +33,7 @@ export default function Skill({data, data_index}) {
     setCounterOverride(Number(value.getAttribute("data-amount")));
   }
 
-  function onMouseOutIndicator(event) {
-    console.log(event.target);
-    if (!event.target.closest(".indicator")) return;
+  function onMouseOutIndicator() {
     setCounterOverride(null);
   }
 
