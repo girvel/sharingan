@@ -46,6 +46,11 @@ export default function Skill({data, data_index, username}) {
   let maximum = max(sets_amounts, 0);
   let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);  // TODO remove number?
 
+  if (norm >= limit && _data.user_level < max(_data.levels.map(l => l.level), 0)) {
+    console.log(norm, limit);
+    setData({..._data, user_level: _data.user_level + 1});
+  }
+
   const indicator_value = [
     ...Array.from({length: norm}, (_, i) =>
       <IndicatorValue key={i} amount={i + 1} kind="norm" />
