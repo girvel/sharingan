@@ -47,7 +47,6 @@ export default function Skill({data, data_index, username}) {
   let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);  // TODO remove number?
 
   if (norm >= limit && _data.user_level < max(_data.levels.map(l => l.level), 0)) {
-    console.log(norm, limit);
     setData({..._data, user_level: _data.user_level + 1});
   }
 

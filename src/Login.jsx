@@ -15,7 +15,7 @@ export default function Login({onLogin}) {
     <>
       <h1>Sharingan</h1>
       <form className="login_form" onSubmit={onSubmit}>
-        <input id="username_input" maxLength="40" placeholder="Username" className="login_element"></input>
+        <input autoFocus id="username_input" maxLength="40" placeholder="Username" className="login_element"></input>
         <button type="submit" className="login_element login_button">Enter</button>
       </form>
     </>
