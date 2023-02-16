@@ -22,10 +22,8 @@ export default function Skill({data, data_index, username}) {
     };
 
     pushExerciseSet(username, set_to_add).then(() => {
-      setData({
-        ..._data,
-        sets: [..._data.sets, set_to_add]
-      });
+      _data.sets.push(set_to_add);
+      setData(_data);
     })
   }
 
