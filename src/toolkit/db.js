@@ -6,7 +6,7 @@ const server_url = "http://" + (inDevelopmentMode() ? "localhost:8000" : "aws.gi
 
 async function post(call, args) {
   const response = await fetch(`${server_url}/${call}/`, {
-    method: 'POST',  // TODO make it GET?
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },

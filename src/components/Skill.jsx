@@ -5,7 +5,6 @@ import IndicatorValue from "./IndicatorValue.jsx";
 import {pushExerciseSet} from "../toolkit/db.js";
 
 
-// TODO remove data_index
 export default function Skill({data, data_index, username}) {
   let [_data, setData] = useState(data);
   let [counterOverride, setCounterOverride] = useState(null);
@@ -44,7 +43,7 @@ export default function Skill({data, data_index, username}) {
 
   let norm = median(sets_amounts.slice(-5), 0);
   let maximum = max(sets_amounts, 0);
-  let total_amount = sets_amounts.reduce((sum, a) => sum + Number(a), 0);  // TODO remove number?
+  let total_amount = sets_amounts.reduce((sum, a) => sum + a, 0);
 
   if (norm >= limit && _data.user_level < max(_data.levels.map(l => l.level), 0)) {
     setData({..._data, user_level: _data.user_level + 1});

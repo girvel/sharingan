@@ -1,7 +1,6 @@
 import './Login.css';
 
 export default function Login({onLogin}) {
-  // TODO forms
   function onSubmit(event) {
     event.preventDefault();
 
