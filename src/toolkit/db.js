@@ -16,7 +16,7 @@ async function remote_call(call, parameters) {
 }
 
 async function post(call, args) {
-  return remote_call(call, {
+  return remote_call(call + "/", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
