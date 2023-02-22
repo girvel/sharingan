@@ -1,39 +1,26 @@
 import './Skill.css';
 import {max, median} from "../toolkit/statistics.js";
 import {useState} from "react";
-import IndicatorValue from "./IndicatorValue.jsx";
 import {pushExerciseSet} from "../toolkit/db.js";
+import CountedInteractiveBar from "./CountedInteractiveBar.jsx";
 
 
 export default function Skill({data, username}) {
   let [_data, setData] = useState(data);
-  let [counterOverride, setCounterOverride] = useState(null);
 
 
-  function onClick(event) {
-    const value = event.target.closest(".indicator_value");
-    if (!value) return;
-
+  function onBarClick(event, amount) {
     const set_to_add = {
       exercise: _data.exercise,
-      amount: Number(value.getAttribute("data-amount")),
+      amount: amount,
       level: _data.user_level,
     };
 
     pushExerciseSet(username, set_to_add).then(() => {
-      _data.sets.push(set_to_add);
-      setData(_data);
+      setData({..._data,
+        sets: [..._data.sets, set_to_add]
+      })
     })
-  }
-
-  function onMouseOverIndicator(event) {
-    const value = event.target.closest(".indicator_value");
-    if (!value) return;
-    setCounterOverride(Number(value.getAttribute("data-amount")));
-  }
-
-  function onMouseOutIndicator() {
-    setCounterOverride(null);
   }
 
 
@@ -49,18 +36,6 @@ export default function Skill({data, username}) {
     setData({..._data, user_level: _data.user_level + 1});
   }
 
-  const indicator_value = [
-    ...Array.from({length: norm}, (_, i) =>
-      <IndicatorValue key={i} amount={i + 1} kind="norm" />
-    ),
-    ...Array.from({length: maximum - norm}, (_, i) =>
-      <IndicatorValue key={norm + i} amount={norm + i + 1} kind="maximum" />
-    ),
-    ...Array.from({length: limit - maximum}, (_, i) =>
-      <IndicatorValue key={maximum + i} amount={maximum + i + 1} kind="empty" />
-    ),
-  ];
-
   return (
     <tr className="skill">
       <td>
@@ -69,16 +44,7 @@ export default function Skill({data, username}) {
       <td>
         lvl. {_data.user_level}, {level_name}
       </td>
-      <td className="indicator" onMouseOver={onMouseOverIndicator} onMouseOut={onMouseOutIndicator}>
-        <span onClick={onClick}>
-          [
-          {indicator_value}
-          ]
-        </span>
-      </td>
-      <td>
-        ({counterOverride ?? norm}/{limit})
-      </td>
+      <CountedInteractiveBar value={norm} dim_value={maximum} length={limit} onClick={onBarClick} />
       <td>
         <span className="dim">{total_amount}</span>
       </td>

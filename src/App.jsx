@@ -3,10 +3,11 @@ import Skill from "./components/Skill"
 import {fetchUserData, groupDataBySkills} from "./toolkit/db.js";
 import {useState} from "react";
 import Login from "./Login.jsx";
+import {inDevelopmentMode} from "./toolkit/stuff.js";
 
 
 export default function App() {
-  let [username, setUsername] = useState(null);
+  let [username, setUsername] = useState(inDevelopmentMode() ? "girvel" : null);
   let [skills, setSkills] = useState([]);
 
 
