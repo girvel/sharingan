@@ -17,7 +17,7 @@ export default function App() {
   if (skills.length == 0) {
     fetchUserData(username).then(data => {
       setSkills(groupDataBySkills(data).map((data, i) =>
-        <Skill key={i} data={data} data_index={i} username={username}/>
+        <Skill key={i} data={data} username={username}/>
       ));
     });
   }

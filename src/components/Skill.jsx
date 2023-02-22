@@ -5,7 +5,7 @@ import IndicatorValue from "./IndicatorValue.jsx";
 import {pushExerciseSet} from "../toolkit/db.js";
 
 
-export default function Skill({data, data_index, username}) {
+export default function Skill({data, username}) {
   let [_data, setData] = useState(data);
   let [counterOverride, setCounterOverride] = useState(null);
 
@@ -62,7 +62,7 @@ export default function Skill({data, data_index, username}) {
   ];
 
   return (
-    <tr className="skill" data-index={data_index}>
+    <tr className="skill">
       <td>
         {_data.exercise}:
       </td>
