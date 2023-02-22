@@ -2,7 +2,7 @@ import {group} from "./statistics.js";
 import {Data} from "dataclass";
 import {inDevelopmentMode} from "./stuff.js";
 
-const server_url = "http://" + (inDevelopmentMode() ? "localhost:8000" : "aws.girvel.xyz");
+const server_url = inDevelopmentMode() ? "http://localhost:8000" : "http://aws.girvel.xyz";
 
 async function post(call, args) {
   const response = await fetch(`${server_url}/${call}/`, {
@@ -21,10 +21,22 @@ async function post(call, args) {
   return Promise.reject();
 }
 
+// TODO extract common logic
+async function get(call, args) {
+  const response = await fetch(`${server_url}/${call}?${new URLSearchParams(args)}`, { method: 'GET' });
+
+  if (response.ok) {
+    return await response.json();
+  }
+
+  console.error(`HTTP error ${response.status}: ${response.statusText}`);
+  return Promise.reject();
+}
+
 class DbRawData extends Data { levels; sets; user_levels; }
 
 export async function fetchUserData(username) {
-  return DbRawData.create(await post("user_data", {user: username}))
+  return DbRawData.create(await get("user_data", {user: username}))
 }
 
 class SkillData extends Data { exercise; levels; user_level; sets; }
